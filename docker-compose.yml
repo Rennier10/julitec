@@ -1,0 +1,19 @@
+# Sesión 10: docker compose up --build  ->  http://localhost:8080
+services:
+  backend:
+    build: ./backend
+    environment:
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-clave-de-desarrollo-muy-larga-para-jwt-0123456789}
+    volumes:
+      - julitec_logs:/app/logs          # volumen nombrado: los logs sobreviven al contenedor
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:5000/api/health')"]
+      interval: 15s
+      retries: 3
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on:
+      backend: { condition: service_healthy }
+volumes:
+  julitec_logs:

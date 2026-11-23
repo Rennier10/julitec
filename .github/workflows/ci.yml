@@ -1,0 +1,33 @@
+# Sesión 13 - CI/CD: prueba, compila y publica imágenes en GitHub Container Registry
+name: CI-CD
+on:
+  push: { branches: [main, develop] }
+  pull_request: { branches: [main, develop] }
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r backend/requirements.txt && cd backend && pytest -q
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: cd frontend && npm install && npm run build
+  docker-publish:                  # solo al hacer merge/push a main
+    needs: [backend-tests, frontend-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions: { contents: read, packages: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with: { registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" }
+      - uses: docker/build-push-action@v6
+        with: { context: ./backend, push: true, tags: "ghcr.io/${{ github.repository_owner }}/julitec-backend:latest" }
+      - uses: docker/build-push-action@v6
+        with: { context: ./frontend, push: true, tags: "ghcr.io/${{ github.repository_owner }}/julitec-frontend:latest" }

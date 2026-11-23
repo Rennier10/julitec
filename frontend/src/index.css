@@ -1,0 +1,34 @@
+:root{--bg:#1a1a3e;--bar:#2b2b66;--card:#15152f;--pink:#e8479a;--green:#2fb37c;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,sans-serif}
+header{display:flex;gap:16px;align-items:center;background:var(--bar);padding:14px 24px}
+.logo{margin:0;font-size:26px;letter-spacing:2px}.logo span{color:var(--pink)}
+.search{flex:1;max-width:520px;border-radius:999px;border:0;padding:12px 18px}
+button,select{cursor:pointer;border:1px solid #fff;background:transparent;color:#fff;padding:10px 14px;border-radius:6px;font-weight:700}
+select{background:var(--card);width:100%;margin:6px 0}.buy{background:var(--green);border-color:var(--green)}
+nav{display:flex;gap:28px;padding:16px 24px;background:var(--bar);border-top:1px solid #ffffff22;overflow-x:auto}
+nav a{cursor:pointer;font-weight:600;text-transform:uppercase;white-space:nowrap}nav a.on{color:var(--pink)}
+.hero{display:flex;justify-content:space-between;gap:24px;margin:24px;padding:36px;border-radius:24px;min-height:260px}
+.hero h2{font-size:44px;margin:8px 0}.mini{display:flex;gap:12px}.mini .cover{width:130px;height:180px}
+.sec{padding:0 24px;margin:32px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;padding:0 24px}
+.card{background:var(--card);border-radius:12px;padding:0 0 14px;overflow:hidden}.card>*:not(.cover){margin-left:14px;margin-right:14px}
+.cover{position:relative;height:260px;display:flex;align-items:flex-end;padding:12px;border-radius:12px;overflow:hidden}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}.cover b{position:relative;font-size:20px;text-shadow:0 2px 8px #000}
+.tag{position:absolute;top:8px;right:8px;background:#000a;padding:3px 8px;border-radius:4px;font-size:11px}
+.off{position:absolute;bottom:8px;right:8px;background:#ff3b30;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:800}
+.old{text-decoration:line-through;opacity:.6;font-size:13px}.price{font-size:20px;font-weight:800}.price em{font-size:10px;background:var(--pink);padding:2px 6px;border-radius:4px}
+.row{display:flex;gap:8px;margin-top:10px}.row button{flex:1;padding:8px}
+.drawer{position:fixed;top:0;right:0;width:360px;height:100%;background:#1c1b3a;padding:20px;box-shadow:-8px 0 30px #000a;overflow:auto}
+.login{min-height:100vh;display:grid;place-items:center}.login-box{background:var(--card);padding:32px;border-radius:16px;width:340px;display:grid;gap:12px;text-align:center}
+.login-box input{padding:12px;border-radius:8px;border:0}.err{color:#ff6b6b}footer{text-align:center;opacity:.6;padding:40px}
+a{cursor:pointer}
+/* ── Modal confirmación de pedido ─────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:#000b;display:grid;place-items:center;z-index:200}
+.modal-box{background:#1c1b3a;border-radius:20px;padding:36px 32px;width:min(480px,92vw);text-align:center;box-shadow:0 8px 40px #000c}
+.success-icon{font-size:56px;line-height:1;margin-bottom:12px}
+.modal-box h2{margin:0 0 8px;font-size:26px}
+.order-id{font-size:13px;opacity:.7;margin:0 0 12px}
+.order-msg{background:#ffffff11;border-radius:8px;padding:10px 14px;font-size:14px;margin-bottom:16px}
+.order-items{text-align:left;border-top:1px solid #fff2;padding-top:12px;display:grid;gap:6px}
+.order-line{display:flex;justify-content:space-between;font-size:14px}
+.order-line small{opacity:.6}
+.order-total{text-align:right;margin-top:12px;font-size:16px;border-top:1px solid #fff2;padding-top:10px}
